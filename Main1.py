@@ -107,9 +107,10 @@ def menu():
                 # printar instruções e depois voltar ao menu principal
                 menu()
                 pass
-        if sair.collidepoint((mx,my)):
-            pg.quit()
-            pg.exit()
+        if sair.collidepoint((mx, my)):
+            if click:
+                pg.quit()
+                pg.exit()
             
         pg.draw.rect(tela_jogo, (0, 200, 200), iniciar)
         pg.draw.rect(tela_jogo, (0, 200, 200), ajuda)
