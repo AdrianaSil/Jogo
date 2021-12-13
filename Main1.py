@@ -12,7 +12,7 @@ def galinhabater():
             galinha.rect.colliderect(carro_4):
         galinha.x = 0
         vidas -= 1
-        font = pg.font.Font('freesansbold.ttf', 32)
+        font = pg.font.Font('visitor2.ttf', 32)
 
         text = font.render("Vidas: " + str(vidas), True, (0, 255, 0), (255, 0, 0))
 
@@ -71,29 +71,32 @@ tela_jogo = pg.display.set_mode((ALTURA, LARGURA))
 pg.display.set_caption("ATRAVESSE")
 clock = pg.time.Clock()
 
-font = pg.font.Font("visitor2.ttf", 20)
+font = pg.font.Font("visitor2.ttf", 80)
 
 
 def escrever(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
-    textrect.topleft = (x, y)
+    #textrect.topleft = (x, y)
+    textrect.center = (x, y)
     surface.blit(textobj, textrect) #encaixar o texto ao botão
 
 
 click = False
 
-
 def menu():
     global click
     while True:
+        #adicionar tela de fundo
         tela.image = tela.imagem5
-        escrever('MENU', font, (255, 255, 255), tela_jogo, 20, 20)
+        tela_group.draw(tela_jogo)
+        escrever('MENU', font, (255, 255, 255), tela_jogo, 420, 50)
 
-        mx, my = pg.mouse.get_pos() # checar posições do mouse
+        mx, my = pg.mouse.get_pos() #checar posições do mouse
 
-        iniciar = pg.Rect(50, 100, 200, 50) # botões
-        ajuda = pg.Rect(50, 200, 200, 50)
+        iniciar = pg.Rect(300, 150, 240, 55) #botões
+        ajuda = pg.Rect(300, 250, 240, 55)
+        sair = pg.Rect(300, 350, 240, 55)
 
         if iniciar.collidepoint((mx, my)):
             if click:
@@ -104,8 +107,13 @@ def menu():
                 # printar instruções e depois voltar ao menu principal
                 menu()
                 pass
-        pg.draw.rect(tela_jogo, (255, 0, 0), iniciar)
-        pg.draw.rect(tela_jogo, (255, 0, 0), ajuda)
+        pg.draw.rect(tela_jogo, (0, 200, 200), iniciar)
+        pg.draw.rect(tela_jogo, (0, 200, 200), ajuda)
+        pg.draw.rect(tela_jogo, (0, 200, 200), sair)
+
+        escrever('Iniciar', font, (255, 255, 255), tela_jogo, 420, 175)
+        escrever('Ajuda', font, (255, 255, 255), tela_jogo, 420, 275)
+        escrever('Sair', font, (255, 255, 255), tela_jogo, 420, 375)
 
         click = False
         for event in pg.event.get():
@@ -138,6 +146,7 @@ carros_group.add(carro_1, carro_2, carro_3, carro_4)
 
 def jogo():
     while True:
+        returnin()
         clock.tick(60)
         for event in pg.event.get():
             if event.type == pg.QUIT:
