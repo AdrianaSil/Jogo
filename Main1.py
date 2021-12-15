@@ -4,7 +4,7 @@ from telas import Tela
 import pygame as pg
 from pygame.locals import *
 
-click = False
+#click = False
 
 def galinhabater():
     global tela, vidas, galinha, carro_1, carro_2, carro_3, carro_4, carros_group, click
@@ -13,13 +13,11 @@ def galinhabater():
             galinha.rect.colliderect(carro_4):
         galinha.x = 0
         vidas -= 1
-
         font = pg.font.Font('visitor2.ttf', 32)
-        text = font.render("Vidas: " + str(vidas), True, (0, 255, 0), (255, 0, 0))
+        text = font.render("Vidas " + str(vidas), True, (110, 110, 100), (230, 210, 100))
         textRect = text.get_rect()
-        textRect.topleft = (10, 10)
+        textRect.topleft = (60, 120)
         tela.image.blit(text, textRect)
-        print(vidas)
 
         if vidas <= 0:
             vidas = 0
@@ -31,14 +29,14 @@ def galinhabater():
             mx, my = pg.mouse.get_pos()  # checar posições do mouse
 
             retornarmenu = pg.Rect(300, 500, 240, 55)  # botões
-            pg.draw.rect(tela_jogo, (0, 200, 200), retornarmenu)
+            pg.draw.rect(tela_jogo, (230, 210, 100), retornarmenu)
 
             if retornarmenu.collidepoint((mx, my)):
-                pg.draw.rect(tela_jogo, (0, 100, 100), retornarmenu)
+                pg.draw.rect(tela_jogo, (255, 200, 100), retornarmenu)
                 if click:
                     menu()
 
-            escrever('MENU', font, (255, 255, 255), tela_jogo, 420, 525)
+            escrever('MENU', font, (110, 110, 110), tela_jogo, 420, 525)
 
             click = False
             for event in pg.event.get():
@@ -47,7 +45,8 @@ def galinhabater():
                 if event.type == MOUSEBUTTONDOWN:  # quando clico o botão do mouse esq
                     if event.button == 1:
                         click = True
-            pg.display.update()
+        pg.display.update()
+        clock.tick(60)
 
 
 def mudarLevel():
@@ -72,7 +71,31 @@ def teclaSecreta():
 
 
 def instrucoes():
-    pass
+    global click
+    tela.image = tela.imagem1
+
+    font = pg.font.Font('visitor2.ttf', 32)
+    mx, my = pg.mouse.get_pos()  # checar posições do mouse
+
+    retornarmenu = pg.Rect(300, 500, 240, 55)  # botões
+    pg.draw.rect(tela_jogo, (230, 210, 100), retornarmenu)
+
+    if retornarmenu.collidepoint((mx, my)):
+        pg.draw.rect(tela_jogo, (255, 200, 100), retornarmenu)
+        if click:
+            menu()
+
+    escrever('MENU', font, (110, 110, 110), tela_jogo, 420, 525)
+
+    click = False
+    for event in pg.event.get():
+        if event.type == QUIT:
+            pg.quit()
+        if event.type == MOUSEBUTTONDOWN:  # quando clico o botão do mouse esq
+            if event.button == 1:
+                click = True
+    pg.display.update()
+    clock.tick(60)
 
 
 def vitoria():
@@ -83,20 +106,20 @@ def vitoria():
         galinha.kill()
         carros_group.empty()
 
-        tela.image = tela.imagem4
+        #tela.image = tela.imagem4
 
         font = pg.font.Font('visitor2.ttf', 32)
         mx, my = pg.mouse.get_pos()  # checar posições do mouse
 
         retornarmenu = pg.Rect(300, 500, 240, 55)  # botões
-        pg.draw.rect(tela_jogo, (0, 200, 200), retornarmenu)
+        pg.draw.rect(tela_jogo, (230, 210, 100), retornarmenu)
 
         if retornarmenu.collidepoint((mx, my)):
-            pg.draw.rect(tela_jogo, (0, 100, 100), retornarmenu)
+            pg.draw.rect(tela_jogo, (255, 200, 100), retornarmenu)
             if click:
                 menu()
 
-        escrever('MENU', font, (255, 255, 255), tela_jogo, 420, 525)
+        escrever('MENU', font, (110, 110, 110), tela_jogo, 420, 525)
 
         click = False
         for event in pg.event.get():
@@ -106,17 +129,17 @@ def vitoria():
                 if event.button == 1:
                     click = True
         pg.display.update()
-
+        clock.tick(60)
 
 LARGURA = 600
 ALTURA = 850
 pg.init()
 tela_jogo = pg.display.set_mode((ALTURA, LARGURA))
-pg.display.set_caption("ATRAVESSE")
+pg.display.set_caption("Porque a galinha atravessou a rua?")
 clock = pg.time.Clock()
 
-font = pg.font.Font("visitor2.ttf", 80)
-
+font = pg.font.Font("visitor2.ttf", 52)
+#pg.time.Clock()
 
 def escrever(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
@@ -128,11 +151,14 @@ def escrever(text, font, color, surface, x, y):
 def menu():
     global click, vidas, carro_1, carro_2, carro_3, carro_4
     vidas = 6
+
     while True:
         # adicionar tela de fundo
-        tela.image = tela.imagem5
+        tela.image = tela.imagem1
         tela_group.draw(tela_jogo)
-        escrever('MENU', font, (255, 255, 255), tela_jogo, 420, 50)
+        m = pg.Rect(5, 30, 825, 40)
+        pg.draw.rect(tela_jogo, (230, 210, 100), m)
+        escrever('PORQUE A GALINHA ATRAVESSOU A RUA?', font, (110, 110, 110), tela_jogo, 420, 50)
 
         mx, my = pg.mouse.get_pos()  # checar posições do mouse
 
@@ -140,12 +166,12 @@ def menu():
         ajuda = pg.Rect(300, 250, 240, 55)
         sair = pg.Rect(300, 350, 240, 55)
 
-        pg.draw.rect(tela_jogo, (0, 200, 200), iniciar)
-        pg.draw.rect(tela_jogo, (0, 200, 200), ajuda)
-        pg.draw.rect(tela_jogo, (0, 200, 200), sair)
+        pg.draw.rect(tela_jogo, (230, 210, 100), iniciar)
+        pg.draw.rect(tela_jogo, (230, 210, 100), ajuda)
+        pg.draw.rect(tela_jogo, (230, 210, 100), sair)
 
         if iniciar.collidepoint((mx, my)):
-            pg.draw.rect(tela_jogo, (0, 100, 100), iniciar)
+            pg.draw.rect(tela_jogo, (255, 200, 100), iniciar)
             if click:
                 carro_1 = Carro(1, 1)
                 carro_2 = Carro(2, 1)
@@ -161,19 +187,18 @@ def menu():
                 jogo()
 
         if ajuda.collidepoint((mx, my)):
-            pg.draw.rect(tela_jogo, (0, 100, 100), ajuda)
+            pg.draw.rect(tela_jogo, (255, 200, 100), ajuda)
             if click:
-                # printar instruções e depois voltar ao menu principal
-                menu()
+                instrucoes()
 
         if sair.collidepoint((mx, my)):
-            pg.draw.rect(tela_jogo, (0, 100, 100), sair)
+            pg.draw.rect(tela_jogo, (255, 200, 100), sair)
             if click:
                 pg.quit()
 
-        escrever('Iniciar', font, (255, 255, 255), tela_jogo, 420, 175)
-        escrever('Ajuda', font, (255, 255, 255), tela_jogo, 420, 275)
-        escrever('Sair', font, (255, 255, 255), tela_jogo, 420, 375)
+        escrever('Iniciar', font, (110, 110, 110), tela_jogo, 420, 175)
+        escrever('Ajuda', font, (110, 110, 110), tela_jogo, 420, 275)
+        escrever('Sair', font, (110, 110, 110), tela_jogo, 420, 375)
 
         click = False
         for event in pg.event.get():
@@ -184,6 +209,7 @@ def menu():
                 if event.button == 1:
                     click = True
         pg.display.update()
+        clock.tick(60)
 
 
 tela = Tela()
@@ -213,7 +239,6 @@ def jogo():
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_b:
                     teclaSecreta()
-
 
         tela_group.draw(tela_jogo)
         galinha_group.draw(tela_jogo)
