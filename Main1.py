@@ -44,7 +44,6 @@ def galinhabater():
             for event in pg.event.get():
                 if event.type == QUIT:
                     pg.quit()
-
                 if event.type == MOUSEBUTTONDOWN:  # quando clico o botão do mouse esq
                     if event.button == 1:
                         click = True
@@ -55,10 +54,10 @@ def mudarLevel():
     global tela, galinha, galinha_group, carro_1, carro_2, carro_3, carro_4
 
     if galinha.x >= LARGURA + 200 and not tela.image == tela.imagem3:
-        carro_1 = Carro(1, 2, 1)
-        carro_2 = Carro(2, 2, 1)
-        carro_3 = Carro(3, 2, 1)
-        carro_4 = Carro(4, 2, 1)
+        carro_1 = Carro(1, 2)
+        carro_2 = Carro(2, 2)
+        carro_3 = Carro(3, 2)
+        carro_4 = Carro(4, 2)
         galinha_group.add(galinha)
         carros_group.empty()
         carros_group.add(carro_1, carro_2, carro_3, carro_4)
@@ -84,7 +83,8 @@ def vitoria():
         galinha.kill()
         carros_group.empty()
 
-        #tela.image = tela.imagem4
+        tela.image = tela.imagem4
+
         font = pg.font.Font('visitor2.ttf', 32)
         mx, my = pg.mouse.get_pos()  # checar posições do mouse
 
@@ -147,10 +147,10 @@ def menu():
         if iniciar.collidepoint((mx, my)):
             pg.draw.rect(tela_jogo, (0, 100, 100), iniciar)
             if click:
-                carro_1 = Carro(1, 1, 1)
-                carro_2 = Carro(2, 1, 1)
-                carro_3 = Carro(3, 1, 1)
-                carro_4 = Carro(4, 1, 1)
+                carro_1 = Carro(1, 1)
+                carro_2 = Carro(2, 1)
+                carro_3 = Carro(3, 1)
+                carro_4 = Carro(4, 1)
                 galinha_group.add(galinha)
                 carros_group.empty()
                 carros_group.add(carro_1, carro_2, carro_3, carro_4)
@@ -194,10 +194,10 @@ galinha = Galinha()
 galinha_group = pg.sprite.Group()
 galinha_group.add(galinha)
 
-carro_1 = Carro(1, 1, 1)
-carro_2 = Carro(2, 1, 1)
-carro_3 = Carro(3, 1, 1)
-carro_4 = Carro(4, 1, 1)
+carro_1 = Carro(1, 1)
+carro_2 = Carro(2, 1)
+carro_3 = Carro(3, 1)
+carro_4 = Carro(4, 1)
 
 carros_group = pg.sprite.Group()
 carros_group.add(carro_1, carro_2, carro_3, carro_4)
@@ -214,6 +214,7 @@ def jogo():
                 if event.key == pg.K_b:
                     teclaSecreta()
 
+
         tela_group.draw(tela_jogo)
         galinha_group.draw(tela_jogo)
         carros_group.draw(tela_jogo)
@@ -224,8 +225,8 @@ def jogo():
         mudarLevel()
         galinhabater()
         carros_group.update()
-        pg.display.update()
         vitoria()
+        pg.display.update()
 
     pg.quit()
 
