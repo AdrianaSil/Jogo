@@ -2,7 +2,6 @@ import pygame as pg
 
 # imagens de carros no metodo pg.image.load("carro.png")
 
-
 class Carro(pg.sprite.Sprite):
     def __init__(self, quantidade, nivel):
         super().__init__()
@@ -10,38 +9,38 @@ class Carro(pg.sprite.Sprite):
         if nivel == 1:
             if quantidade == 1:
                 self.x = 250
-                self.image = pg.image.load("carro.png")
+                self.image = pg.image.load("carroNovo.png")
                 self.velo = -4
 
             elif quantidade == 2:
                 self.x = 350
-                self.image = pg.image.load("carro.png")
+                self.image = pg.image.load("carroNovo.png")
                 self.velo = 5
             elif quantidade == 3:
                 self.x = 450
-                self.image = pg.image.load("carro.png")
+                self.image = pg.image.load("carroNovo.png")
                 self.velo = 3
             else:
                 self.x = 580
-                self.image = pg.image.load("carro.png")
+                self.image = pg.image.load("carroNovo.png")
                 self.velo = -2
         else:
             if quantidade == 1:
                 self.x = 250
-                self.image = pg.image.load("carro.png")
+                self.image = pg.image.load("carroNovo.png")
                 self.velo = -3
 
             elif quantidade == 2:
                 self.x = 350
-                self.image = pg.image.load("carro.png")
+                self.image = pg.image.load("carroNovo.png")
                 self.velo = 3
             elif quantidade == 3:
                 self.x = 450
-                self.image = pg.image.load("carro.png")
+                self.image = pg.image.load("carroNovo.png")
                 self.velo = 6
             else:
                 self.x = 580
-                self.image = pg.image.load("carro.png")
+                self.image = pg.image.load("carroNovo.png")
                 self.velo = -5
     # facil
         self.y = 650/2
