@@ -7,7 +7,7 @@ class Tela(pg.sprite.Sprite):
         self.imagem1 = pg.image.load("background.png")
         self.imagem2 = pg.image.load("over.png")
         self.imagem3 = pg.image.load("nivel2.png")
-        self.imagem4 = pg.image.load("vitoria.png")
+        self.imagem4 = pg.image.load("win.png")
 
         self.imagem1 = pg.transform.scale(self.imagem1, (850, 600))
         self.imagem2 = pg.transform.scale(self.imagem2, (850, 600))
