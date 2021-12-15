@@ -4,12 +4,10 @@ from telas import Tela
 import pygame as pg
 from pygame.locals import *
 
-#click = False
+click = False
 
 def galinhabater():
     global tela, vidas, galinha, carro_1, carro_2, carro_3, carro_4, carros_group, click
-
-    global tela, vidas, galinha, carro_1, carro_2, carro_3, carro_4, click
 
     if galinha.rect.colliderect(carro_1) or galinha.rect.colliderect(carro_2) or galinha.rect.colliderect(carro_3) or \
             galinha.rect.colliderect(carro_4):
@@ -86,15 +84,15 @@ def vitoria():
         galinha.kill()
         carros_group.empty()
 
-        tela.image = tela.imagem4
-
+        #tela.image = tela.imagem4
+        font = pg.font.Font('visitor2.ttf', 32)
         mx, my = pg.mouse.get_pos()  # checar posições do mouse
 
-        retornarmenu1 = pg.Rect(100, 300, 240, 55)  # botões
-        pg.draw.rect(tela_jogo, (0, 200, 200), retornarmenu1)
+        retornarmenu = pg.Rect(300, 500, 240, 55)  # botões
+        pg.draw.rect(tela_jogo, (0, 200, 200), retornarmenu)
 
-        if retornarmenu1.collidepoint((mx, my)):
-            pg.draw.rect(tela_jogo, (0, 100, 100), retornarmenu1)
+        if retornarmenu.collidepoint((mx, my)):
+            pg.draw.rect(tela_jogo, (0, 100, 100), retornarmenu)
             if click:
                 menu()
 
@@ -104,7 +102,6 @@ def vitoria():
         for event in pg.event.get():
             if event.type == QUIT:
                 pg.quit()
-
             if event.type == MOUSEBUTTONDOWN:  # quando clico o botão do mouse esq
                 if event.button == 1:
                     click = True
@@ -204,6 +201,7 @@ carro_4 = Carro(4, 1, 1)
 
 carros_group = pg.sprite.Group()
 carros_group.add(carro_1, carro_2, carro_3, carro_4)
+
 
 def jogo():
     while True:
