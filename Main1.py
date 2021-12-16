@@ -72,7 +72,8 @@ def teclaSecreta():
 
 def instrucoes():
     global click
-    tela.image = tela.imagem1
+    tela.image = tela.imagem5
+    tela_group.draw(tela_jogo)
 
     font = pg.font.Font('visitor2.ttf', 32)
     mx, my = pg.mouse.get_pos()  # checar posições do mouse
@@ -88,16 +89,16 @@ def instrucoes():
     escrever('MENU', font, (110, 110, 110), tela_jogo, 420, 525)
 
     click = False
-    for event in pg.event.get():
-        if event.type == QUIT:
-            pg.quit()
-        if event.type == MOUSEBUTTONDOWN:  # quando clico o botão do mouse esq
-            if event.button == 1:
-                click = True
     pg.display.update()
-    clock.tick(60)
-
-
+    running = True
+    while running:
+        for event in pg.event.get():
+            if event.type == pg.QUIT or click == True:
+                running = False
+            if event.type == MOUSEBUTTONDOWN:  # quando clico o botão do mouse esq
+                if event.button == 1:
+                    click = True
+                    running = False
 def vitoria():
     global carros_group, click
 
